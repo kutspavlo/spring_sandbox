@@ -1,10 +1,13 @@
 package spring.practice;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import spring.practice.dao.CarDaoJDBC;
+import spring.practice.models.Car;
 
-public class TestSpring {
+import java.util.List;
+
+public class Main {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+  //      ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        Music music = context.getBean("rockMusic", RockMusic.class);
 //        Music music2 = context.getBean("classicalMusic", ClassicalMusic.class);
 //
@@ -21,5 +24,14 @@ public class TestSpring {
 //        System.out.println(computer);
 //
 //        context.close();
+
+
+         CarDaoJDBC carDaoJDBC = new CarDaoJDBC();
+         List<Car> cars = carDaoJDBC.getAll();
+         carDaoJDBC.deleteCar(cars.get(0));
+
+        Car car = new Car("Ford", (short) 1992, "red");
+        carDaoJDBC.createCar(car);
+
     }
 }
