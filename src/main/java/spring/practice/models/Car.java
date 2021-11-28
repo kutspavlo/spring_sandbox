@@ -1,29 +1,28 @@
 package spring.practice.models;
 
-import org.hibernate.annotations.CollectionId;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name="first_db")
+@Table(name="car")
 public class Car {
-    @Column
+    @Id
+    @Column(name = "uuid")
     private String uuid;
-    @Column
+    @Column(name = "model")
     private String model;
-    @Column
-    private short year;
-    @Column
+    @Column (name = "year")
+    private int year;
+    @Column (name = "color")
     private String color;
 
     public Car() {
         uuid = UUID.randomUUID().toString();
     }
 
-    public Car(String model, short year, String color) {
+    public Car(String model, int year, String color) {
         uuid = UUID.randomUUID().toString();
         this.model = model;
         this.year = year;
@@ -46,7 +45,7 @@ public class Car {
         this.model = model;
     }
 
-    public short getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -60,5 +59,10 @@ public class Car {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %d, %s", model, year, color);
     }
 }

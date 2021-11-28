@@ -1,37 +1,37 @@
 package spring.practice;
 
 import spring.practice.dao.CarDaoJDBC;
+import spring.practice.dao.CarDaoJPA;
 import spring.practice.models.Car;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-  //      ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-//        Music music = context.getBean("rockMusic", RockMusic.class);
-//        Music music2 = context.getBean("classicalMusic", ClassicalMusic.class);
 //
-//        MusicPlayer musicPlayer =  new MusicPlayer(music);
-//        musicPlayer.playMusic();
+//        JDBC implementation test
 //
-//        MusicPlayer classicalMusicPlayerPlayer = new MusicPlayer(music2);
-//        classicalMusicPlayerPlayer.playMusic();
-
-//        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-//        musicPlayer.playMusic();
+//        CarDaoJDBC carDaoJDBC = new CarDaoJDBC();
+//        List<Car> cars = carDaoJDBC.getAll();
+//        cars.forEach(System.out::println);
 //
-//        Computer computer = context.getBean("computer", Computer.class);
-//        System.out.println(computer);
+//        Car car = new Car("Ford", (short) 1992, "white");
+//        carDaoJDBC.createCar(car);
 //
-//        context.close();
+//          JPA implementation test
 
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        CarDaoJPA carDaoJPA = new CarDaoJPA(entityManager);
+        List<Car> cars = carDaoJPA.getAll();
+        cars.forEach(System.out::println);
+        carDaoJPA.deleteCar(cars.get(0));
 
-         CarDaoJDBC carDaoJDBC = new CarDaoJDBC();
-         List<Car> cars = carDaoJDBC.getAll();
-         carDaoJDBC.deleteCar(cars.get(0));
-
-        Car car = new Car("Ford", (short) 1992, "red");
-        carDaoJDBC.createCar(car);
+        Car car = new Car("Tesla", 2020, "black");
+        carDaoJPA.createCar(car);
 
     }
 }

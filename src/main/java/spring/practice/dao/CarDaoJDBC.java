@@ -63,7 +63,7 @@ public class CarDaoJDBC implements CarDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, car.getId());
             preparedStatement.setString(2, car.getModel());
-            preparedStatement.setShort(3, car.getYear());
+            preparedStatement.setInt(3, car.getYear());
             preparedStatement.setString(4,car.getColor());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
