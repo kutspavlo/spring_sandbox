@@ -1,5 +1,6 @@
 package spring.practice;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.practice.dao.CarDaoJDBC;
 import spring.practice.dao.CarDaoJPA;
 import spring.practice.models.Car;
@@ -34,13 +35,22 @@ public class Main {
 //        Car car = new Car("Tesla", 2020, "black");
 //        carDaoJPA.createCar(car);
 
-//       CarService (manually injection of CarDaoJPA)
-         Car car = new Car("BMW", 2014, "red");
-         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car");
-         EntityManager entityManager = entityManagerFactory.createEntityManager();
-         CarDaoJPA carDaoJPA = new CarDaoJPA(entityManager);
-         CarService carService = new CarService(carDaoJPA);
-         carService.addCar(car);
+////       CarService (manually injection of CarDaoJPA)
+
+//         Car car = new Car("BMW", 2014, "red");
+//         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car");
+//         EntityManager entityManager = entityManagerFactory.createEntityManager();
+//         CarDaoJPA carDaoJPA = new CarDaoJPA(entityManager);
+//         CarService carService = new CarService(carDaoJPA);
+//         carService.addCar(car);
+
+          //CarService dependency injection with application context by xml
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        CarService carService = context.getBean("carService", CarService.class);
+        Car car = new Car("Tesla", 2019, "white");
+        carService.addCar(car);
+        context.close();
 
     }
 }

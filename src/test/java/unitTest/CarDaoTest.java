@@ -1,3 +1,5 @@
+package unitTest;
+
 import spring.practice.models.Car;
 import spring.practice.dao.CarDAO;
 
@@ -6,6 +8,9 @@ import java.util.List;
 
 public class CarDaoTest implements CarDAO {
     private ArrayList<Car> cars;
+    public CarDaoTest(){
+
+    }
     public CarDaoTest(ArrayList<Car> cars) {
         this.cars = cars;
     }
@@ -23,5 +28,9 @@ public class CarDaoTest implements CarDAO {
     @Override
     public void deleteCar(Car car) {
         cars.remove(car);
+    }
+
+    public void setCars(ArrayList<Car> cars) {
+        this.cars = cars;
     }
 }

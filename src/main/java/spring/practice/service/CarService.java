@@ -13,6 +13,10 @@ import java.util.Collections;
 public class CarService {
     private CarDaoJPA carDaoJPA;
 
+    public CarService() {
+
+    }
+
     public CarService(CarDaoJPA carDaoJPA) {
         this.carDaoJPA = carDaoJPA;
     }
@@ -28,4 +32,7 @@ public class CarService {
         }
     }
 
+    public void setCarDaoJPA(CarDaoJPA carDaoJPA) {
+        this.carDaoJPA = carDaoJPA;
+    }
 }

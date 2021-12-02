@@ -7,6 +7,26 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="spring.practice"/>
+
+    <bean id="entityManagerFactory"
+          class="javax.persistence.Persistence"
+          factory-method="createEntityManagerFactory">
+          <constructor-arg value="Car"/>
+    </bean>
+
+    <bean id="entityManager"
+          factory-bean="entityManagerFactory"
+          factory-method="createEntityManager"/>
+
+    <bean id="carDaoJPA"
+          class="spring.practice.dao.CarDaoJPA">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+
+    <bean id="carService"
+          class="spring.practice.service.CarService">
+        <property name="carDaoJPA" ref="carDaoJPA"/>
+    </bean>
+
 
 </beans>

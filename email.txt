@@ -1,1 +1,1 @@
-BMW, 2014, red
+Tesla, 2019, white

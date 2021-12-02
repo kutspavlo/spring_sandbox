@@ -8,6 +8,10 @@ import java.util.List;
 public class CarDaoJPA implements CarDAO {
     private EntityManager entityManager;
 
+    public CarDaoJPA() {
+
+    }
+
     public CarDaoJPA(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -34,5 +38,9 @@ public class CarDaoJPA implements CarDAO {
         entityManager.remove(car);
         entityManager.getTransaction().commit();
 
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 }
