@@ -1,8 +1,12 @@
 package unitTest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import spring.practice.models.Car;
 
+@Component
 public class CarServiceTest {
+    @Autowired
     private CarDaoTest carDaoTest;
 
     public CarServiceTest(){

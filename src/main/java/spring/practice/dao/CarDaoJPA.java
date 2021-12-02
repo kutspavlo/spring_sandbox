@@ -1,12 +1,19 @@
 package spring.practice.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import spring.practice.models.Car;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import java.util.List;
 
+@Repository
 public class CarDaoJPA implements CarDAO {
     private EntityManager entityManager;
+    {
+        entityManager = Persistence.createEntityManagerFactory("Car").createEntityManager();
+    }
 
     public CarDaoJPA() {
 

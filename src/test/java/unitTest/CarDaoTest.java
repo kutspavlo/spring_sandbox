@@ -1,12 +1,16 @@
 package unitTest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import spring.practice.models.Car;
 import spring.practice.dao.CarDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CarDaoTest implements CarDAO {
+    @Autowired
     private ArrayList<Car> cars;
     public CarDaoTest(){
 
@@ -30,7 +34,5 @@ public class CarDaoTest implements CarDAO {
         cars.remove(car);
     }
 
-    public void setCars(ArrayList<Car> cars) {
-        this.cars = cars;
-    }
+
 }

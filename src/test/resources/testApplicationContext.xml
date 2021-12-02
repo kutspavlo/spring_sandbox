@@ -7,6 +7,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="unitTest"/>
 
     <bean id="car1"
           class="spring.practice.models.Car">
@@ -39,17 +40,5 @@
             </list>
         </constructor-arg>
     </bean>
-
-
-    <bean id="CarDaoTest"
-          class="unitTest.CarDaoTest">
-        <property name="cars" ref="cars"/>
-    </bean>
-
-    <bean id="carServiceTest"
-          class="unitTest.CarServiceTest">
-        <property name="carDaoTest" ref="CarDaoTest"/>
-    </bean>
-
 
 </beans>

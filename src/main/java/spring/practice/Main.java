@@ -48,7 +48,7 @@ public class Main {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         CarService carService = context.getBean("carService", CarService.class);
-        Car car = new Car("Tesla", 2019, "white");
+        Car car = new Car("Tesla", 2021, "silver");
         carService.addCar(car);
         context.close();
 

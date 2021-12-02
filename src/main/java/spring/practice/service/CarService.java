@@ -1,5 +1,7 @@
 package spring.practice.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.practice.dao.CarDaoJPA;
 import spring.practice.models.Car;
 
@@ -10,7 +12,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 
+@Service
 public class CarService {
+    @Autowired
     private CarDaoJPA carDaoJPA;
 
     public CarService() {
