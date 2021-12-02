@@ -1,5 +1,7 @@
 package unitTest;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.practice.models.Car;
 
@@ -44,12 +46,18 @@ public class TestMain {
 
         //XML Definition
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("testApplicationContext.xml");
-        ArrayList<Car> cars = context.getBean("cars", ArrayList.class);
-        CarServiceTest carServiceTest = context.getBean("carServiceTest", CarServiceTest.class);
-        Car car = new Car("Siat", 2003, "silver");
-        carServiceTest.addCar(car);
-        cars.forEach(System.out::println);
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("testApplicationContext.xml");
+//        ArrayList<Car> cars = context.getBean("cars", ArrayList.class);
+//        CarServiceTest carServiceTest = context.getBean("carServiceTest", CarServiceTest.class);
+//        Car car = new Car("Siat", 2003, "silver");
+//        carServiceTest.addCar(car);
+//        cars.forEach(System.out::println);
 
+        ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        CarServiceTest carServiceTest = context.getBean(CarServiceTest.class);
+        Car car = new Car("Fiat", 2002, "brown");
+        carServiceTest.addCar(car);
+        ArrayList<Car> cars = context.getBean("cars", ArrayList.class);
+        cars.forEach(System.out::println);
     }
 }

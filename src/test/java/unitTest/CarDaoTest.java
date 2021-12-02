@@ -34,5 +34,7 @@ public class CarDaoTest implements CarDAO {
         cars.remove(car);
     }
 
-
+    public void setCars(ArrayList<Car> cars) {
+        this.cars = cars;
+    }
 }

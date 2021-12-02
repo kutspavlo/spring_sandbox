@@ -10,10 +10,9 @@ import java.util.List;
 
 @Repository
 public class CarDaoJPA implements CarDAO {
+    @Autowired
     private EntityManager entityManager;
-    {
-        entityManager = Persistence.createEntityManagerFactory("Car").createEntityManager();
-    }
+
 
     public CarDaoJPA() {
 

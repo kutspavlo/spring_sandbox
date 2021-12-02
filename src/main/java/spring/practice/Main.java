@@ -1,6 +1,9 @@
 package spring.practice;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import spring.practice.config.Config;
 import spring.practice.dao.CarDaoJDBC;
 import spring.practice.dao.CarDaoJPA;
 import spring.practice.models.Car;
@@ -46,11 +49,15 @@ public class Main {
 
           //CarService dependency injection with application context by xml
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        CarService carService = context.getBean("carService", CarService.class);
-        Car car = new Car("Tesla", 2021, "silver");
-        carService.addCar(car);
-        context.close();
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        CarService carService = context.getBean("carService", CarService.class);
+//        Car car = new Car("Tesla", 2021, "silver");
+//        carService.addCar(car);
+//        context.close();
 
+        ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        CarService carService = context.getBean(CarService.class);
+        Car car = new Car("Tesla", 2021, "pink");
+        carService.addCar(car);
     }
 }
