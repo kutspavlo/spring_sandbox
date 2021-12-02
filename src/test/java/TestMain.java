@@ -16,22 +16,30 @@ public class TestMain {
         cars.add(car3);
 
 
+//        CarDaoTest carDaoTest = new CarDaoTest(cars);
+//
+//        ArrayList<Car> allCars = carDaoTest.getAll();
+//        allCars.forEach(System.out::println);
+//
+//        System.out.println("***************");
+//
+//        Car newCar = new Car("Volvo", 2021, "silver");
+//        carDaoTest.createCar(newCar);
+//        ArrayList<Car> allCarsIncludingNew = carDaoTest.getAll();
+//        allCarsIncludingNew.forEach(System.out::println);
+//
+//        System.out.println("***************");
+//
+//        carDaoTest.deleteCar(newCar);
+//        ArrayList<Car> allCarsExcludingNew = carDaoTest.getAll();
+//        allCarsExcludingNew.forEach(System.out::println);
+
+        //CarServiceTest
+
+        Car car = new Car("Ford", 1987, "brown");
         CarDaoTest carDaoTest = new CarDaoTest(cars);
-
-        ArrayList<Car> allCars = carDaoTest.getAll();
-        allCars.forEach(System.out::println);
-
-        System.out.println("***************");
-
-        Car newCar = new Car("Volvo", 2021, "silver");
-        carDaoTest.createCar(newCar);
-        ArrayList<Car> allCarsIncludingNew = carDaoTest.getAll();
-        allCarsIncludingNew.forEach(System.out::println);
-
-        System.out.println("***************");
-
-        carDaoTest.deleteCar(newCar);
-        ArrayList<Car> allCarsExcludingNew = carDaoTest.getAll();
-        allCarsExcludingNew.forEach(System.out::println);
+        CarServiceTest carServiceTest = new CarServiceTest(carDaoTest);
+        carServiceTest.addCar(car);
+        cars.forEach(System.out::println);
     }
 }

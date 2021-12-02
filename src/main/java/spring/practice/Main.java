@@ -3,6 +3,7 @@ package spring.practice;
 import spring.practice.dao.CarDaoJDBC;
 import spring.practice.dao.CarDaoJPA;
 import spring.practice.models.Car;
+import spring.practice.service.CarService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,16 +23,24 @@ public class Main {
 //        carDaoJDBC.createCar(car);
 //
 //          JPA implementation test
+//
+//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car");
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        CarDaoJPA carDaoJPA = new CarDaoJPA(entityManager);
+//        List<Car> cars = carDaoJPA.getAll();
+//        cars.forEach(System.out::println);
+//        carDaoJPA.deleteCar(cars.get(0));
+//
+//        Car car = new Car("Tesla", 2020, "black");
+//        carDaoJPA.createCar(car);
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CarDaoJPA carDaoJPA = new CarDaoJPA(entityManager);
-        List<Car> cars = carDaoJPA.getAll();
-        cars.forEach(System.out::println);
-        carDaoJPA.deleteCar(cars.get(0));
-
-        Car car = new Car("Tesla", 2020, "black");
-        carDaoJPA.createCar(car);
+//       CarService (manually injection of CarDaoJPA)
+         Car car = new Car("BMW", 2014, "red");
+         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car");
+         EntityManager entityManager = entityManagerFactory.createEntityManager();
+         CarDaoJPA carDaoJPA = new CarDaoJPA(entityManager);
+         CarService carService = new CarService(carDaoJPA);
+         carService.addCar(car);
 
     }
 }
