@@ -6,9 +6,11 @@ import spring.practice.models.Car;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class CarDaoJPA implements CarDAO {
     @Autowired
     private EntityManager entityManager;

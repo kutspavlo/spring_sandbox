@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.stringtemplate.v4.ST;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import spring.practice.models.Car;
 
 import javax.persistence.EntityManager;
@@ -16,6 +18,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("spring.practice")
 @PropertySource("${classpath:app.properties}")
+@EnableTransactionManagement(proxyTargetClass = true)
 
 public class Config {
 
@@ -41,13 +44,25 @@ public class Config {
     }
 
     @Bean
-    public EntityManager entityManager(Properties hibernateProperties) {
-        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(persistanceUnit, hibernateProperties);
-        return entityManagerFactory.createEntityManager();
+    public EntityManagerFactory entityManagerFactory() {
+        return Persistence.createEntityManagerFactory(persistanceUnit, hibernateProperties());
+    }
+
+    @Bean
+    public EntityManager entityManager() {
+        return entityManagerFactory().createEntityManager();
     }
 
     @Bean(name = "fiat")
     public Car car(@Value("${car.Fiat}") String model, @Value("1995") int year, @Value("brown") String color){
         return new Car(model, year, color);
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory());
+
+        return transactionManager;
     }
 }
