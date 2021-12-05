@@ -55,7 +55,7 @@ public class TestMain {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         CarServiceTest carServiceTest = context.getBean(CarServiceTest.class);
-        Car car = new Car("Fiat", 2002, "brown");
+        Car car = new Car("Fiat", 2012, "orange");
         carServiceTest.addCar(car);
         ArrayList<Car> cars = context.getBean("cars", ArrayList.class);
         cars.forEach(System.out::println);

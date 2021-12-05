@@ -57,7 +57,7 @@ public class Main {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         CarService carService = context.getBean(CarService.class);
-        Car car = new Car("Tesla", 2021, "pink");
+        Car car = context.getBean("fiat", Car.class);
         carService.addCar(car);
     }
 }

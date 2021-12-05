@@ -1,8 +1,12 @@
 package spring.practice.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.stringtemplate.v4.ST;
+import spring.practice.models.Car;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +15,12 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("spring.practice")
+@PropertySource("${classpath:app.properties}")
+
 public class Config {
+
+    @Value("${persistance.Car}")
+    private String persistanceUnit;
 
     @Bean
     public Properties hibernateProperties() {
@@ -33,7 +42,12 @@ public class Config {
 
     @Bean
     public EntityManager entityManager(Properties hibernateProperties) {
-        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Car", hibernateProperties);
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(persistanceUnit, hibernateProperties);
         return entityManagerFactory.createEntityManager();
+    }
+
+    @Bean(name = "fiat")
+    public Car car(@Value("${car.Fiat}") String model, @Value("1995") int year, @Value("brown") String color){
+        return new Car(model, year, color);
     }
 }
