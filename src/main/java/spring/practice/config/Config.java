@@ -44,13 +44,13 @@ public class Config {
     }
 
     @Bean
-    public EntityManagerFactory entityManagerFactory() {
-        return Persistence.createEntityManagerFactory(persistanceUnit, hibernateProperties());
+    public EntityManagerFactory entityManagerFactory(Properties hibernateProperties) {
+        return Persistence.createEntityManagerFactory(persistanceUnit, hibernateProperties);
     }
 
     @Bean
-    public EntityManager entityManager() {
-        return entityManagerFactory().createEntityManager();
+    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+        return entityManagerFactory.createEntityManager();
     }
 
     @Bean(name = "fiat")
@@ -59,9 +59,9 @@ public class Config {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory());
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
 
         return transactionManager;
     }
